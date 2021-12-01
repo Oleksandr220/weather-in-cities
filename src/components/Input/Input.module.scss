@@ -1,0 +1,15 @@
+.weatherOnCityInput {
+  margin-right: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 12px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.weatherOnCityInput:hover {
+  background-color: #f9f3eb;
+}
+.weatherOnCityInput:focus {
+  background-color: #e3e3e2;
+}
