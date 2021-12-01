@@ -15,7 +15,7 @@ const CitiesView = ({ onUpdate, onDelete }) => {
           <Link
             className={styles.citiesListItem__link}
             to={{
-              pathname: `/details/${city.name}`,
+              pathname: `/weather-in-cities/details/${city.name}`,
               state: { from: location },
             }}
           >
