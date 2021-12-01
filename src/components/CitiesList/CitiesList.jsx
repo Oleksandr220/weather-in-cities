@@ -1,21 +1,21 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import styles from './CitiesList.module.scss';
-import Button from '../Button';
-import getCities from '../../redux/citiesItems/selector';
+import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import styles from './CitiesList.module.scss'
+import Button from '../Button'
+import getCities from '../../redux/citiesItems/selector'
 
 const CitiesView = ({ onUpdate, onDelete }) => {
-  const cities = useSelector(getCities);
-  const location = useLocation();
+  const cities = useSelector(getCities)
+  const location = useLocation()
 
   return (
     <ul className={styles.citiesList}>
-      {cities.map(city => (
+      {cities.map((city) => (
         <li key={city.id} className={styles.citiesListItem}>
           <Link
             className={styles.citiesListItem__link}
             to={{
-              pathname: `/weather-in-cities/details/${city.name}`,
+              pathname: `/details/${city.name}`,
               state: { from: location },
             }}
           >
@@ -28,7 +28,7 @@ const CitiesView = ({ onUpdate, onDelete }) => {
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default CitiesView;
+export default CitiesView

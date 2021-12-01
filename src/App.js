@@ -9,12 +9,12 @@ function App() {
     <>
       <Suspense fallback={<h3>Loading</h3>}>
         <Switch>
-          <Route path="/weather-in-cities/" exact>
+          <Route path="/" exact>
             <PageWraper title="List of added cities">
               <CitiesWeather />
             </PageWraper>
           </Route>
-          <Route path="/weather-in-cities/details/:cityName">
+          <Route path="/details/:cityName">
             <PageWraper title="Detailed information about the weather in the city">
               <WeatherDetailsView />
             </PageWraper>
