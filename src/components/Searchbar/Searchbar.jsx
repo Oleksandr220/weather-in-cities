@@ -1,28 +1,28 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import Button from '../Button';
-import Input from '../Input';
-import styles from './Searchbar.module.scss';
-import weather from '../../redux/weatherCity/action';
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import Button from '../Button'
+import Input from '../Input'
+import styles from './Searchbar.module.scss'
+import weather from '../../redux/weatherCity/action'
 
 export default function Searchbar() {
-  const [request, setRequest] = useState('');
-  const dispatch = useDispatch();
+  const [request, setRequest] = useState('')
+  const dispatch = useDispatch()
 
-  const handleNameChange = event => {
-    setRequest(event.currentTarget.value.toLowerCase());
-  };
+  const handleNameChange = (event) => {
+    setRequest(event.currentTarget.value.toLowerCase())
+  }
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault()
 
-    if (request.trim() === '') {
-      return;
+    if (!request) {
+      return
     }
 
-    dispatch(weather(request));
-    setRequest('');
-  };
+    dispatch(weather(request))
+    setRequest('')
+  }
 
   return (
     <div>
@@ -32,8 +32,8 @@ export default function Searchbar() {
           onChange={handleNameChange}
           placeholder="Search weather in city"
         />
-        <Button text="search city" />
+        <Button text="search city" size="16" name="search" />
       </form>
     </div>
-  );
+  )
 }

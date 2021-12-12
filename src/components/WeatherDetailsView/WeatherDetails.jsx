@@ -3,6 +3,8 @@ import { useParams, useHistory, useLocation } from 'react-router-dom'
 import Button from '../Button'
 import getWeatherApi from '../../services/weatherhelf-api'
 import styles from './WeatherDeatails.module.scss'
+import { suntime } from '../../constants'
+import { getTemperature } from '../../constants'
 
 export default function WeatherDetailsView() {
   const history = useHistory()
@@ -12,22 +14,16 @@ export default function WeatherDetailsView() {
 
   async function getResponseCity(cityName) {
     const result = await getWeatherApi(cityName)
-
-    let sunrise = new Date(result.sys.sunrise * 1000).toLocaleTimeString(
-      'en-US'
-    )
-    let sunset = new Date(result.sys.sunset * 1000).toLocaleTimeString('en-US')
-
-    const weather = result.weather.find((key) => key.description)
+    const { description } = result.weather[0]
 
     const currentCity = {
       countryName: result.sys.country,
       cityName: result.name,
-      description: weather.description,
-      temp: Math.round(result.main.temp - 273),
-      feels_like: Math.round(result.main.feels_like - 273),
-      sunrise: sunrise,
-      sunset: sunset,
+      description,
+      temp: getTemperature(result.main.temp),
+      feels_like: getTemperature(result.main.feels_like),
+      sunrise: suntime(result.sys.sunrise),
+      sunset: suntime(result.sys.sunset),
     }
     return setCity(currentCity)
   }
@@ -47,7 +43,7 @@ export default function WeatherDetailsView() {
     <>
       {city && (
         <>
-          <Button text="Back" onClick={onGoBack} />
+          <Button text="Back" onClick={onGoBack} size="16" name="home" />
           <div className={styles.info}>
             <h3 className={styles.field}>Country: {city.countryName}</h3>
             <p className={styles.field}>City: {city.cityName}</p>

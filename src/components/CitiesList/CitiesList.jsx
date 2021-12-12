@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux'
 import styles from './CitiesList.module.scss'
 import Button from '../Button'
 import getCities from '../../redux/citiesItems/selector'
+import { getTemperature } from '../../constants'
+import { pathDetails } from '../../constants'
 
 const CitiesView = ({ onUpdate, onDelete }) => {
   const cities = useSelector(getCities)
   const location = useLocation()
-
   return (
     <ul className={styles.citiesList}>
       {cities.map((city) => (
@@ -15,16 +16,26 @@ const CitiesView = ({ onUpdate, onDelete }) => {
           <Link
             className={styles.citiesListItem__link}
             to={{
-              pathname: `/weather-in-cities/details/${city.name}`,
+              pathname: `${pathDetails}${city.name}`,
               state: { from: location },
             }}
           >
             <p>Country: {city.sys.country}</p>
             <p>City: {city.name}</p>
-            <p>Temp: {Math.round(city.main.temp - 273)} °C</p>
+            <p>Temp: {getTemperature(city.main.temp)} °C</p>
           </Link>
-          <Button text="Delete" onClick={() => onDelete(city.id)} />
-          <Button text="Update" onClick={() => onUpdate(city.name)} />
+          <Button
+            text="Delete"
+            onClick={() => onDelete(city.id)}
+            size="18"
+            name="trash-can"
+          />
+          <Button
+            text="Update"
+            onClick={() => onUpdate(city.name)}
+            size="18"
+            name="loop2"
+          />
         </li>
       ))}
     </ul>
@@ -32,3 +43,7 @@ const CitiesView = ({ onUpdate, onDelete }) => {
 }
 
 export default CitiesView
+
+// useMemo
+// useCallBack
+// saga
