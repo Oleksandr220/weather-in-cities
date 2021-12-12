@@ -1,7 +1,13 @@
 .info {
-  padding: 50px 20px;
+  margin-right: 100px;
 }
 
 .field {
   font-size: 25px;
+}
+
+.details__container {
+  display: flex;
+  align-items: center;
+  padding: 50px 20px;
 }
